@@ -6,7 +6,7 @@
 /*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:17:39 by olachhab          #+#    #+#             */
-/*   Updated: 2025/01/11 15:57:16 by olachhab         ###   ########.fr       */
+/*   Updated: 2025/01/12 10:30:45 by olachhab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char **find_path(char *envp[])
 {
-	int	i;
+	int		i;
+	char	*ptr;
 
 	if (!envp)
 		return (NULL);
@@ -24,7 +25,8 @@ char **find_path(char *envp[])
 		if (envp[i][0] == 'P' && envp[i][1] == 'A' && envp[i][2] == 'T'
 			&& envp[i][3] == 'H' && envp[i][4] == '=')
 		{
-			return (splitpath(envp[i] + 5, ':'));
+			ptr = envp[i] + 5;
+			return (splitpath(ptr, ':'));
 		}
 		i++;
 	}

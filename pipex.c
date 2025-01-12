@@ -6,7 +6,7 @@
 /*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:33:40 by olachhab          #+#    #+#             */
-/*   Updated: 2025/01/11 15:50:55 by olachhab         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:38:52 by olachhab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,16 @@ int main(int ac, char *av[], char *envp[])
 	pid_1 = fork();
 	if (pid_1 < 0)
 		error_check("Fork error");
-
 	if (pid_1 == 0)
 		first_child(pipe_fd, av, envp);
-
 	pid_2 = fork();
 	if (pid_2 < 0)
 		error_check("Fork error");
-
 	if (pid_2 == 0)
 		second_child(pipe_fd, av, envp);
-
-	waitpid(pid_1, &status, 0);
-	waitpid(pid_2, &status, 0);
-
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
+	waitpid(pid_1, &status, 0);
+	waitpid(pid_2, &status, 0);
 	return (0);
 }
